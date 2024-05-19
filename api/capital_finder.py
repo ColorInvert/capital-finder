@@ -29,6 +29,8 @@ class handler(BaseHTTPRequestHandler):
 
       answer = []
 
+      payload = "USAGE OF COUNTRY KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
+
       for i in data:
         if i == "capital":
           answer.append(i[0])
@@ -40,6 +42,9 @@ class handler(BaseHTTPRequestHandler):
       data = response.json()
 
       answer = []
+
+      payload = "USAGE OF CAPITAL KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
+
 
       for i in data:
         if i == "country":
