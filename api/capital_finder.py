@@ -32,7 +32,7 @@ class handler(BaseHTTPRequestHandler):
       payload = "USAGE OF COUNTRY KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
 
       
-      answer.append(data['capital'][0])
+      answer.append(data[0].capital[0])
       payload = f"The capital of {query_dict["country"]} is {str(answer)}."
 
     # If user provides a ?capital=y then call the v3.1/capital/y url.
@@ -44,7 +44,7 @@ class handler(BaseHTTPRequestHandler):
 
       payload = "USAGE OF CAPITAL KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
 
-      answer.append(data['country'][0])
+      answer.append(data[0].name.common)
       payload = f"{query_dict["capital"]} is the capital of {str(answer)}."
       
 
