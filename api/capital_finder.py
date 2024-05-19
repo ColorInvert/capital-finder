@@ -24,7 +24,7 @@ class handler(BaseHTTPRequestHandler):
 
     #if user provides a ?country=x then call the v3.1/name/x url.
     if "country" in query_dict.keys():
-      response = requests.get(country_api + query_dict)
+      response = requests.get(country_api + query_dict["country"])
       data = response.json()
 
       answer = []
@@ -38,7 +38,7 @@ class handler(BaseHTTPRequestHandler):
 
     # If user provides a ?capital=y then call the v3.1/capital/y url.
     if "capital" in query_dict.keys():
-      response = requests.get(capital_api + query_dict)
+      response = requests.get(capital_api + query_dict["capital"])
       data = response.json()
 
       answer = []
