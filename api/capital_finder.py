@@ -6,6 +6,10 @@ import requests
 class handler(BaseHTTPRequestHandler):
   def do_GET(self):
 
+    #assemble default payload message
+    payload = "This message not modified. Did you give a value for country or capital?"
+
+
     # Parse query, save as query_dict
     path = self.path
     url_components = parse.urlsplit(path)
@@ -16,11 +20,38 @@ class handler(BaseHTTPRequestHandler):
     country_api = "https://restcountries.com/v3.1/name/{name}"
     capital_api = "https://restcountries.com/v3.1/capital/{capital}"
 
-    if "country" in query_dict.values():
-      payload = requests.get(country_api + query_dict)
 
+
+    #if user provides a ?country=x then call the v3.1/name/x url.
+    if "country" in query_dict.values():
+      response = requests.get(country_api + query_dict)
+      data = response.json()
+
+      answer = []
+
+      for i in data:
+        if i == "capital":
+          answer.append(i[0])
+          payload = f"The capital of {query_dict["country"]} is {str(answer)}."
+
+    # If user provides a ?capital=y then call the v3.1/capital/y url.
     if "capital" in query_dict.values():
-      payload = requests.get(capital_api + query_dict)
+      response = requests.get(capital_api + query_dict)
+      data = response.json()
+
+      answer = []
+
+      for i in data:
+        if i == "country":
+          answer.append(i[0])
+          payload = f"{query_dict["capital"]} is the capital of {str(answer)}."
+      
+
+    # Parse through ocean of data in response, extract only the opposite of request
+    # IE, capital data if country input, country data if capital input.
+
+
+
 
     # Response code
     self.send_response(200)
@@ -28,9 +59,6 @@ class handler(BaseHTTPRequestHandler):
      # Establish header(s)
     self.send_header("Content-type", "text/plain")
     self.end_headers()
-
-    #assemble payload message
-    payload = "No response. Did you give a value for country or capital?"
 
     #deploy payload to client requester
     self.wfile.write(payload.encode("utf-8"))
