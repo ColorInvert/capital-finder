@@ -31,10 +31,9 @@ class handler(BaseHTTPRequestHandler):
 
       payload = "USAGE OF COUNTRY KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
 
-      for i in data:
-        if i == "capital":
-          answer.append(i[0])
-          payload = f"The capital of {query_dict["country"]} is {str(answer)}."
+      
+      answer.append(data[0]['capital'][0])
+      payload = f"The capital of {query_dict["country"]} is {str(answer)}."
 
     # If user provides a ?capital=y then call the v3.1/capital/y url.
     if "capital" in query_dict.keys():
@@ -45,11 +44,8 @@ class handler(BaseHTTPRequestHandler):
 
       payload = "USAGE OF CAPITAL KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
 
-
-      for i in data:
-        if i == "country":
-          answer.append(i[0])
-          payload = f"{query_dict["capital"]} is the capital of {str(answer)}."
+      answer.append(data[0]['capital'][0])
+      payload = f"{query_dict["capital"]} is the capital of {str(answer)}."
       
 
     # Parse through ocean of data in response, extract only the opposite of request
