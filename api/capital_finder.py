@@ -24,31 +24,31 @@ class handler(BaseHTTPRequestHandler):
 
     #if user provides a ?country=x then call the v3.1/name/x url.
     if "country" in query_dict.keys():
-      response = requests.get(country_api + query_dict["country"])
+      response = requests.get(country_api + query_dict['country'])
       data = response.json()
 
       answer = []
 
       payload = "USAGE OF COUNTRY KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
 
-      print(f"DATA IS {data[0]["capital"][0]}")
+      print(f"DATA IS {data[0]['capital'][0]}")
       
-      answer.append(data[0]["capital"][0])
-      payload = f"The capital of {query_dict["country"]} is {str(answer)}."
+      answer.append(data[0]['capital'][0])
+      payload = f"The capital of {query_dict['country']} is {str(answer)}."
 
     # If user provides a ?capital=y then call the v3.1/capital/y url.
     if "capital" in query_dict.keys():
-      response = requests.get(capital_api + query_dict["capital"])
+      response = requests.get(capital_api + query_dict['capital'])
       data = response.json()
 
       answer = []
 
       payload = "USAGE OF CAPITAL KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
 
-      print(f"DATA IS {data[0]["name"]["common"]}")
+      print(f"DATA IS {data[0]['name']['common']}")
 
-      answer.append(data[0]["name"]["common"])
-      payload = f"{query_dict["capital"]} is the capital of {str(answer)}."
+      answer.append(data[0]['name']['common'])
+      payload = f"{query_dict['capital']} is the capital of {str(answer)}."
       
 
     # Parse through ocean of data in response, extract only the opposite of request
