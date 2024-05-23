@@ -61,7 +61,7 @@ class handler(BaseHTTPRequestHandler):
 
             # print(f"DATA IS {data[0]['name']['common']}")
             for countries in data:
-                country = countries[0]['name']['common']
+                country = countries['name']['common']
 
                 answer.append(country)
             payload = f"{query_dict['capital']} is the capital of {str(answer[0])}."
