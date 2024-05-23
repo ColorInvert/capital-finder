@@ -23,14 +23,18 @@ class handler(BaseHTTPRequestHandler):
 
         # if user provides a ?country=x then call the v3.1/name/x url.
         if "country" in query_dict.keys():
-            response = requests.get(country_api + query_dict["country"])
-            data = response.json()
-            print(f"OUR DATA IS {data}")
-            answer = []
-
             payload = "USAGE OF COUNTRY KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
 
-            # print(f"DATA IS {data[0]['capital'][0]}")
+            try:
+                response = requests.get(country_api.format(name=query_dict["country"]))
+                if response.status_code == 200:
+                    data = response.json()
+                    print(f"OUR DATA IS {data}")
+                    answer = []
+
+            except:
+                response.raise_for_status()
+
             for countries in data:
                 country = countries["capital"][0]
 
@@ -39,12 +43,19 @@ class handler(BaseHTTPRequestHandler):
 
         # If user provides a ?capital=y then call the v3.1/capital/y url.
         if "capital" in query_dict.keys():
-            response = requests.get(capital_api + query_dict["capital"])
-            data = response.json()
-            print(f"OUR DATA IS {data}")
-            answer = []
-
             payload = "USAGE OF CAPITAL KEYWORD DETECTED, BUT RESPONSE NOT ASSEMBLED."
+            try:
+
+                response = requests.get(
+                    capital_api.format(capital=query_dict["capital"])
+                )
+                if response.status_code == 200:
+                    data = response.json()
+                    print(f"OUR DATA IS {data}")
+                    answer = []
+
+            except:
+                response.raise_for_status()
 
             # print(f"DATA IS {data[0]['name']['common']}")
             for capitals in data:
