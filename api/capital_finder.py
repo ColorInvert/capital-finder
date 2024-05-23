@@ -35,10 +35,12 @@ class handler(BaseHTTPRequestHandler):
             except:
                 response.raise_for_status()
 
-            for countries in data:
-                country = countries["capital"][0]
 
-                answer.append(country)
+            #determine name of capital from dataset
+            for capitals in data:
+                capital = capitals["capital"][0]
+
+                answer.append(capital)
             payload = f"The capital of {query_dict['country']} is {str(answer[0])}."
 
         # If user provides a ?capital=y then call the v3.1/capital/y url.
@@ -58,11 +60,10 @@ class handler(BaseHTTPRequestHandler):
                 response.raise_for_status()
 
             # print(f"DATA IS {data[0]['name']['common']}")
-            for capitals in data:
-                capital = capitals["capital"][0]
+            for countries in data:
+                country = countries[0]['name']['common']
 
-                answer.append(capital)
-            # answer.append(data[0]['name']['common'])
+                answer.append(country)
             payload = f"{query_dict['capital']} is the capital of {str(answer[0])}."
 
         # Parse through ocean of data in response, extract only the opposite of request
