@@ -11,9 +11,9 @@ serverless, or capital_finder.py is a first foray into usage of serverless funct
 ##### How to use
 
 To receive the country a capital is located within, format the url like so:
-https://capital-finder-casey-8u6ssuo7b-caseys-projects-8d527c52.vercel.app/api/capital_finder?country=vietnam
+https://capital-finder-casey-g.vercel.app/api/capital_finder?country=vietnam
 
 To receive the capital of an input country, format the url like so:
-https://capital-finder-casey-8u6ssuo7b-caseys-projects-8d527c52.vercel.app/api/capital_finder?capital=hanoi
+https://capital-finder-casey-g.vercel.app/api/capital_finder?capital=hanoi
 
 The two examples above can have the contents after the = sign replaced with your own country or capital name to receive the expected results for that country or capital.
